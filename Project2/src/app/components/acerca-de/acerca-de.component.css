@@ -16,14 +16,14 @@ div{
         top: 600px;
     }
 }
-@media (max-width: 576px){
+@media (max-width: 575px){
     #fotodeperfil{
         position:absolute;
         width: 30%;
         border-radius: 100%;
         box-shadow: 3px 3px 3px grey;
         left: 33%;
-        top: 600px;
+        top: 950px;
     }
 }
 
