@@ -4,13 +4,15 @@
  */
 package com.portfolio.FR2.Security.Repository;
 
-import com.portfolio.FR2.Security.Entity.Rol;
-import com.portfolio.FR2.Security.Enums.RolNombre;
+import com.portfolio.FR2.Security.Entity.Usuario;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface iRolRepository extends JpaRepository<Rol, Integer>{
-    Optional<Rol> findByRolNombre(RolNombre rolNombre);
+public interface iUsuarioRepository extends JpaRepository<Usuario, Integer>{
+    Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+    
+    boolean existByNombreUsuario(String nombreUsuario);
+    boolean existByEmail(String email);
 }
