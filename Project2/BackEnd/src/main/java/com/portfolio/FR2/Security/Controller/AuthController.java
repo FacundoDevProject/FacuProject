@@ -4,6 +4,9 @@
  */
 package com.portfolio.FR2.Security.Controller;
 
+import com.portfolio.FR2.Security.Dto.JwtDto;
+import com.portfolio.FR2.Security.Dto.LoginUsuario;
+import com.portfolio.FR2.Security.Dto.NuevoUsuario;
 import com.portfolio.FR2.Security.Entity.Rol;
 import com.portfolio.FR2.Security.Entity.Usuario;
 import com.portfolio.FR2.Security.Enums.RolNombre;
@@ -49,10 +52,10 @@ public class AuthController {
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos desconocidos o inválidos"),HttpStatus.BAD_REQUEST);
         
-        if(usuarioService.existsByNombreUsuario(nombreUsuario.getNombreUsuario()))
+        if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity(new Mensaje("El nombre de usuario ya se encuentra en uso"),HttpStatus.BAD_REQUEST);
         
-        if(usuarioService.existsByEmail(nombreUsuario.getEmail()))
+        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("El correo electrónico ya se encuentra asignado a otro usuario"),HttpStatus.BAD_REQUEST);
         
         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
@@ -69,7 +72,7 @@ public class AuthController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
+    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
        if(bindingResult.hasErrors())
            return new ResponseEntity(new Mensaje("Campos incorrectos o inválidos"), HttpStatus.BAD_REQUEST);
        
@@ -82,7 +85,7 @@ public class AuthController {
         
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         
-        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUserName(), userDetails.getAuthorities());
+        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
         
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
