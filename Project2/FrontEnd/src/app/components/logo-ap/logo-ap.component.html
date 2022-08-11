@@ -10,10 +10,9 @@
                 <a href="https://www.instagram.com/"><img src="../../../assets/instagram.png" alt="instagram"></a>
                 <a href="https://github.com/"><img src="../../../assets/github.png" alt="github"></a>
                 <a href="https://www.facebook.com/"><img src="../../../assets/facebook.png" alt="facebook"></a>
-                <button type="button" class="btn btn-outline-light" (click)="login()">INGRESO</button>
+                <button type="button" class="btn btn-outline-light" (click)="login()" *ngIf="!isLogged">INGRESO</button>
+                <button type="button" class="btn btn-outline-light" (click)="login()" *ngIf="isLogged">CERRAR SESIÓN</button>
             </div>
         </div>
     </div>
 </div>
-
-
