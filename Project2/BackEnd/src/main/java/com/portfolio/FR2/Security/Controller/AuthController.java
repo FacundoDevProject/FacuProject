@@ -27,6 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,7 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
     
-    @PostMapping("/nuevo")
+    @PostMapping("/auth/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos desconocidos o inválidos"),HttpStatus.BAD_REQUEST);
@@ -71,7 +72,7 @@ public class AuthController {
         return new ResponseEntity(new Mensaje("Usuario guardado correctamente"),HttpStatus.CREATED);
     }
     
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
        if(bindingResult.hasErrors())
            return new ResponseEntity(new Mensaje("Campos incorrectos o inválidos"), HttpStatus.BAD_REQUEST);

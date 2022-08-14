@@ -1,6 +1,7 @@
 package com.portfolio.FR2.Security.Entity;
 
 import com.portfolio.FR2.Security.Enums.RolNombre;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Rol {
+public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
